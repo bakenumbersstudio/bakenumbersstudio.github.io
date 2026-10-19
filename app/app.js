@@ -68,7 +68,7 @@ function renderOrders(){const t=today(),open=S.orders.filter(o=>!o.done);const l
 $('oShowDone').onchange=()=>render();
 $('qOrder').onclick=()=>{if(needFull())return;const {q}=currentQuote();oClear();$('oCust').value=$('qCust').value;$('oTotal').value=q.price.toFixed(2);$('oPaid').value=q.deposit.toFixed(2);document.querySelector('nav button[data-t=orders]').click();};
 
-function render(){document.querySelectorAll('.lockmsg').forEach(e=>{e.innerHTML=S.unlocked?'':'<div class="lockcard"><b>Full version</b><br>This part unlocks with the one-time $2.99 upgrade. See More.</div>';const s=e.parentElement;[...s.children].forEach(c=>{if(c!==e&&c.tagName!=='P')c.style.display=S.unlocked?'':'none';});});
+function render(){document.querySelectorAll('.lockmsg').forEach(e=>{e.innerHTML=S.unlocked?'':'<div class="lockcard"><b>Full version</b><br>This part unlocks with the one-time $2.99 upgrade. <a href="https://www.etsy.com/listing/4598848827/pay-once-cake-order-tracker-pricing-web" target="_blank" rel="noopener">Get it on Etsy</a>, then enter your code under More.</div>';const s=e.parentElement;[...s.children].forEach(c=>{if(c!==e&&c.tagName!=='P')c.style.display=S.unlocked?'':'none';});});
  renderOrders();$('plan').textContent=S.unlocked?'· Full':'· Free';$('bName').value=S.bakery;
  $('pList').innerHTML=S.pantry.length?`<table>${S.pantry.map(p=>`<tr><td>${esc(p.name)}</td><td>${money(p.pkgPrice)} / ${p.pkgSize} ${p.pkgUnit}</td><td><button class="x" onclick="delPantry(${p.id})">×</button></td></tr>`).join('')}</table>`:'';
  const r=S.recipes.find(r=>r.id===editing);$('rEdit').innerHTML=r?recipeEditor(r):'';
