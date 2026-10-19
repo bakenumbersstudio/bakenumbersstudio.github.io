@@ -1,0 +1,51 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>BakeNumbers Cake Quote</title><meta name="theme-color" content="#c06b52"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg">
+<link rel="apple-touch-icon" href="icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;color:#3a2a2a;background:#fffaf7}
+header{background:#c06b52;color:#fff;padding:12px 16px;font-weight:700}nav{display:flex;background:#fbefe9;position:sticky;top:0}
+nav button{flex:1;border:0;background:none;padding:12px 2px;font-size:13px;color:#3a2a2a}nav button.on{border-bottom:3px solid #c06b52;font-weight:700}
+main{max-width:640px;margin:auto;padding:12px 16px 80px}section{display:none}section.on{display:block}
+label{display:block;font-size:13px;margin:8px 0 2px;color:#6b5555}input,select{width:100%;padding:9px;font-size:16px;border:1px solid #ddc9c0;border-radius:6px;background:#fff}
+.row{display:flex;gap:8px}.row>*{flex:1}.card{background:#fff;border:1px solid #f0dfd7;border-radius:10px;padding:12px;margin:10px 0}
+.btn{display:inline-block;background:#c06b52;color:#fff;border:0;border-radius:8px;padding:10px 14px;font-size:15px;margin:6px 6px 0 0}.btn.alt{background:#fff;color:#c06b52;border:1px solid #c06b52}
+.big{font-size:26px;font-weight:700}.muted{color:#8a7575;font-size:13px}.warn{color:#b3261e;font-size:13px}table{width:100%;border-collapse:collapse}td,th{padding:6px;border-bottom:1px solid #f0dfd7;text-align:left;font-size:14px}
+.lockcard{background:#fbefe9;border:1px dashed #c06b52;border-radius:10px;padding:14px;margin:10px 0}.late{color:#b3261e;font-weight:700}.x{background:none;border:0;color:#b3261e;font-size:18px}
+@media print{nav,header,.noprint{display:none!important}section{display:none!important}#quote{display:block!important}}
+</style></head><body>
+<header>BakeNumbers Cake Quote <span id="plan" class="muted" style="color:#fde"></span></header>
+<nav><button data-t="quote" class="on">Quote</button><button data-t="recipes">Recipes</button><button data-t="pantry">Pantry</button><button data-t="orders">Orders</button><button data-t="servings">Sizes</button><button data-t="more">More</button></nav>
+<main>
+<section id="quote" class="on">
+ <div class="card noprint">
+ <label>Customer name</label><input id="qCust" placeholder="e.g. Jordan, birthday Nov 2">
+ <div class="row"><div><label>Recipe</label><select id="qRecipe"></select></div><div><label>Batches</label><input id="qBatches" type="number" min="0" step="0.25" value="1"></div></div>
+ <label>Or type ingredient cost directly ($)</label><input id="qIng" type="number" min="0" step="0.01" placeholder="used when no recipe is picked" value="18">
+ <div class="row"><div><label>Boxes, boards, toppers ($)</label><input id="qExtras" type="number" min="0" step="0.01" value="4"></div><div><label>Overhead (% of supplies)</label><input id="qOh" type="number" min="0" step="1" value="0"></div></div>
+ <div class="row"><div><label>Your hours</label><input id="qHrs" type="number" min="0" step="0.25" value="3"></div><div><label>Hourly rate ($)</label><input id="qRate" type="number" min="0" step="0.5" value="15"></div></div>
+ <div class="row"><div><label>Delivery miles</label><input id="qMiles" type="number" min="0" step="1" value="0"></div><div><label>$ per mile</label><input id="qPerMile" type="number" min="0" step="0.05" value="0.70"></div></div>
+ <div class="row"><div><label>Pricing method</label><select id="qMethod"><option value="margin">Margin %</option><option value="markup">Markup %</option><option value="fixed">Fixed price $</option></select></div><div><label id="qValLbl">Margin (% of price)</label><input id="qVal" type="number" min="0" step="1" value="20"></div></div>
+ <label>Deposit (%)</label><input id="qDep" type="number" min="0" max="100" step="5" value="50">
+ </div>
+ <div class="card" id="qOut"></div>
+ <div class="noprint"><button class="btn" id="qPng">Save quote image</button><button class="btn alt" id="qPdf">Print / save PDF</button><button class="btn alt" id="qOrder">Save as order</button></div>
+</section>
+<section id="recipes"><div class="lockmsg"></div><div id="rList"></div><button class="btn" id="rAdd">+ New recipe</button><div id="rEdit"></div></section>
+<section id="pantry"><div class="lockmsg"></div><p class="muted">Add what you buy: the package price and package size. Recipes then cost themselves.</p><div id="pList"></div>
+ <div class="card"><label>Ingredient</label><input id="pName" placeholder="All-purpose flour"><div class="row"><div><label>Package price ($)</label><input id="pPrice" type="number" min="0" step="0.01"></div><div><label>Package size</label><input id="pSize" type="number" min="0" step="0.01"></div><div><label>Unit</label><select id="pUnit"></select></div></div><button class="btn" id="pAdd">Add to pantry</button></div></section>
+<section id="orders"><div class="lockmsg"></div><div id="oWrap"><div class="card"><b id="oFormT">New order</b><label>Customer</label><input id="oCust" placeholder="Name and phone">
+ <div class="row"><div><label>Pickup date</label><input id="oDate" type="date"></div><div><label>Pickup time</label><input id="oTime" type="time"></div></div>
+ <label>What they ordered</label><input id="oWhat" placeholder="8 in vanilla, blue roses, 'Happy 30th'">
+ <div class="row"><div><label>Order total ($)</label><input id="oTotal" type="number" min="0" step="0.01"></div><div><label>Deposit paid ($)</label><input id="oPaid" type="number" min="0" step="0.01"></div></div>
+ <button class="btn" id="oSave">Save order</button><button class="btn alt" id="oCancel" style="display:none">Cancel edit</button></div>
+ <div class="card" id="oSum"></div><div id="oList"></div><label><input type="checkbox" id="oShowDone" style="width:auto"> Show picked-up orders</label></div></section>
+<section id="servings"><div class="lockmsg"></div><div class="card"><div class="row"><div><label>Shape</label><select id="sShape"><option value="round">Round</option><option value="sheet">Square / sheet</option></select></div><div><label id="sALbl">Diameter (in)</label><input id="sA" type="number" min="1" value="8"></div><div id="sBWrap" style="display:none"><label>Length (in)</label><input id="sB" type="number" min="1" value="13"></div></div>
+ <label>Price per serving you want ($)</label><input id="sPrice" type="number" min="0" step="0.25" value="4"></div><div class="card" id="sOut"></div>
+ <p class="muted">Estimates for a standard ~4 in tall cake: wedding slice 1×2 in, party slice 2×2 in. Your own cutting may differ.</p></section>
+<section id="more"><div class="card"><b>Your bakery name</b><label>Shown on quotes</label><input id="bName" placeholder="Your bakery"></div>
+ <div class="card"><b>Full version, $2.99 once</b><p class="muted">Free: the basic price calculator. Full: order list with pickup dates and balances due, pantry and recipe costing, deposits on quotes, quote image and PDF, and the servings chart. Pay once, no subscription.</p>
+ <label>Unlock code</label><input id="uCode" placeholder="Enter code"><button class="btn" id="uBtn">Unlock</button><div id="uMsg" class="muted"></div></div>
+ <div class="card"><button class="btn alt" id="bExport">Back up my data</button><p class="muted">Everything stays on this phone. No account.</p></div></section>
+</main>
+<canvas id="cv" width="1080" height="1350" style="display:none"></canvas>
+<script src="calc.js"></script><script src="app.js"></script></body></html>
