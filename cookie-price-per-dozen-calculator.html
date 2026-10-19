@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free Cookie Price Per Dozen Calculator | BakeNumbersStudio</title>
+<meta name="description" content="Free decorated cookie pricing calculator: get your price per dozen and per cookie from ingredients, decorating time, packaging and profit margin.">
+<link rel="canonical" href="https://bakenumbersstudio.github.io/cookie-price-per-dozen-calculator.html">
+<meta property="og:title" content="Free Cookie Price Per Dozen Calculator | BakeNumbersStudio">
+<meta property="og:description" content="How much to charge for a dozen decorated cookies? Get a quick price per dozen and per cookie.">
+<meta property="og:type" content="website"><meta property="og:url" content="https://bakenumbersstudio.github.io/cookie-price-per-dozen-calculator.html">
+<link rel="stylesheet" href="style.css"></head><body>
+<header><a href="./">&larr; BakeNumbersStudio free calculators</a></header>
+<h1>Free Cookie Price Per Dozen Calculator</h1>
+<p>How much should you charge for a dozen decorated cookies? Enter your costs for one dozen and get a price per dozen and per cookie.</p>
+<div class="card">
+<label for="ing">Ingredient cost per dozen ($)</label><input id="ing" type="number" min="0" step="0.01" value="9" inputmode="decimal">
+<label for="hrs">Baking + decorating hours per dozen</label><input id="hrs" type="number" min="0" step="0.25" value="2" inputmode="decimal">
+<label for="rate">Your hourly rate ($)</label><input id="rate" type="number" min="0" step="0.5" value="15" inputmode="decimal">
+<label for="pkg">Packaging per dozen: bags, boxes, labels ($)</label><input id="pkg" type="number" min="0" step="0.01" value="3" inputmode="decimal">
+<label for="mar">Profit margin (% of price)</label><input id="mar" type="number" min="0" max="90" step="1" value="20" inputmode="decimal">
+<p class="hint">Type 20 for 20%. Margin is the share of the price you keep as profit (capped at 90%).</p>
+<div id="out" aria-live="polite"></div>
+</div>
+<h2>Pricing sets, tiers and bulk orders?</h2>
+<p>The Cookie Pricing Calculator spreadsheet costs your dough and royal icing batches, prices Simple, Medium and Detailed designs per cookie, dozen or set, and builds an order quote with rush fees and a deposit. It works in Excel and Google Sheets.</p>
+<a class="cta" href="https://www.etsy.com/listing/4592777993">See the Cookie Pricing Spreadsheet on Etsy</a>
+<a class="cta alt" href="https://www.etsy.com/listing/4598005940/bakery-pricing-spreadsheet-bundle-cake">Cakes too? Get the Bakery Pricing Bundle</a>
+<h2>How this cookie price is worked out</h2>
+<p>Cost per dozen = ingredients + (hours &times; hourly rate) + packaging. Price per dozen = cost &divide; (1 &minus; margin), and price per cookie = price per dozen &divide; 12. Example: $9 ingredients, 2 hours at $15, and $3 packaging cost $42 a dozen. At a 20% margin that's $52.50 a dozen, or $4.38 a cookie.</p>
+<!-- Affiliate "supplies I use" section intentionally hidden until an affiliate program is approved. Every affiliate link must carry a visible "paid link" label. -->
+<footer>Estimates for planning only. Check your local cottage food rules and your real costs before quoting. &copy; BakeNumbersStudio &middot; <a href="cake-pricing-calculator.html">Cake pricing calculator</a></footer>
+<script>
+function calc(){const v=id=>Math.max(0,parseFloat(document.getElementById(id).value)||0);
+const c=v('ing')+v('hrs')*v('rate')+v('pkg');const m=Math.min(v('mar'),90)/100;const p=c/(1-m);
+document.getElementById('out').innerHTML='Cost per dozen: $'+c.toFixed(2)+'<br><b>Price per dozen: $'+p.toFixed(2)+'</b><br><small>Per cookie: $'+(p/12).toFixed(2)+' &middot; Profit per dozen: $'+(p-c).toFixed(2)+'</small>';}
+document.querySelectorAll('input').forEach(i=>i.addEventListener('input',calc));calc();
+</script></body></html>

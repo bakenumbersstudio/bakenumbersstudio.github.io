@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free Cake Pricing Calculator for Home Bakers | BakeNumbersStudio</title>
+<meta name="description" content="Free cake pricing calculator: add ingredient cost, your hours, hourly rate, packaging and profit margin to get a suggested cake price in seconds.">
+<link rel="canonical" href="https://bakenumbersstudio.github.io/cake-pricing-calculator.html">
+<meta property="og:title" content="Free Cake Pricing Calculator | BakeNumbersStudio">
+<meta property="og:description" content="How much should I charge for a cake? Get a quick price from your costs and your time.">
+<meta property="og:type" content="website"><meta property="og:url" content="https://bakenumbersstudio.github.io/cake-pricing-calculator.html">
+<link rel="stylesheet" href="style.css"></head><body>
+<header><a href="./">&larr; BakeNumbersStudio free calculators</a></header>
+<h1>Free Cake Pricing Calculator</h1>
+<p>How much should you charge for a cake? Enter your numbers for one cake and get a suggested price that covers your ingredients, your time and your packaging, plus profit.</p>
+<div class="card">
+<label for="ing">Ingredient cost ($)</label><input id="ing" type="number" min="0" step="0.01" value="18" inputmode="decimal">
+<label for="hrs">Your hours (bake + decorate)</label><input id="hrs" type="number" min="0" step="0.25" value="3" inputmode="decimal">
+<label for="rate">Your hourly rate ($)</label><input id="rate" type="number" min="0" step="0.5" value="15" inputmode="decimal">
+<label for="pkg">Packaging: box, board, ribbon ($)</label><input id="pkg" type="number" min="0" step="0.01" value="4" inputmode="decimal">
+<label for="mar">Profit margin (% of price)</label><input id="mar" type="number" min="0" max="90" step="1" value="20" inputmode="decimal">
+<p class="hint">Type 20 for 20%. Margin is the share of the price you keep as profit (capped at 90%).</p>
+<div id="out" aria-live="polite"></div>
+</div>
+<h2>Price every cake, not just one</h2>
+<p>This page gives one quick price. The Home Bakery Pricing &amp; Quote spreadsheet costs each recipe from your own ingredient list, adds overhead and waste, compares markup, margin and fixed prices side by side, and prints a customer quote with a deposit. It works in Excel and Google Sheets.</p>
+<a class="cta" href="https://www.etsy.com/listing/4592571015">See the Home Bakery Pricing Spreadsheet on Etsy</a>
+<a class="cta alt" href="https://www.etsy.com/listing/4598005940/bakery-pricing-spreadsheet-bundle-cake">Cakes and cookies? Get the Bakery Pricing Bundle</a>
+<h2>How this cake price is worked out</h2>
+<p>Cost = ingredients + (hours &times; hourly rate) + packaging. Price = cost &divide; (1 &minus; margin). Example: $18 ingredients, 3 hours at $15, and $4 packaging cost $67. At a 20% margin the price is $83.75, which leaves $16.75 profit.</p>
+<!-- Affiliate "tools I use" section intentionally hidden until an affiliate program is approved. Every affiliate link must carry a visible "paid link" label. -->
+<footer>Estimates for planning only. Check your local cottage food rules and your real costs before quoting. &copy; BakeNumbersStudio &middot; <a href="cookie-price-per-dozen-calculator.html">Cookie price per dozen calculator</a></footer>
+<script>
+function calc(){const v=id=>Math.max(0,parseFloat(document.getElementById(id).value)||0);
+const cost=v('ing')+v('hrs')*v('rate')+v('pkg');const m=Math.min(v('mar'),90)/100;const price=cost/(1-m);
+document.getElementById('out').innerHTML='Cost: $'+cost.toFixed(2)+'<br><b>Suggested price: $'+price.toFixed(2)+'</b><br><small>Profit: $'+(price-cost).toFixed(2)+' ('+(m*100).toFixed(0)+'% of price)</small>';}
+document.querySelectorAll('input').forEach(i=>i.addEventListener('input',calc));calc();
+</script></body></html>
